@@ -1,34 +1,48 @@
+import java.util.Scanner;
+
 public class TypingSpeedAccuracyCheckerQ2 {
 
     static void checkTypingAccuracy(String original, String typed) {
-        int matched = 0;
-        int firstMismatch = -1;
+        int matchedCharacters = 0;
+        int firstMismatchPosition = -1;
 
-        for (int i = 0; i < original.length(); i++) {
-            if (original.charAt(i) == typed.charAt(i)) {
-                matched++;
-            } else if (firstMismatch == -1) {
-                firstMismatch = i;
+        for (int index = 0; index < original.length(); index++) {
+            if (original.charAt(index) == typed.charAt(index)) {
+                matchedCharacters++;
+            } else if (firstMismatchPosition == -1) {
+                firstMismatchPosition = index;
             }
         }
 
-        double accuracy = ((double) matched / original.length()) * 100;
+        int totalCharacters = original.length();
+        double accuracyPercentage = ((double) matchedCharacters / totalCharacters) * 100;
 
         System.out.printf("Matched: %d/%d | Accuracy: %.2f%%",
-                matched, original.length(), accuracy);
+                matchedCharacters, totalCharacters, accuracyPercentage);
 
-        if (firstMismatch == -1) {
+        if (firstMismatchPosition == -1) {
             System.out.println(" | No Mismatches");
         } else {
             System.out.println(" | First Mismatch at position " +
-                    (firstMismatch + 1) + " ('" +
-                    original.charAt(firstMismatch) + "' vs '" +
-                    typed.charAt(firstMismatch) + "')");
+                    (firstMismatchPosition + 1) + " ('" +
+                    original.charAt(firstMismatchPosition) + "' vs '" +
+                    typed.charAt(firstMismatchPosition) + "')");
         }
     }
 
     public static void main(String[] args) {
-        checkTypingAccuracy("hello world", "hello worlt");
-        checkTypingAccuracy("coding", "coding");
+        Scanner scanner = new Scanner(System.in);
+
+        String originalPassage = scanner.nextLine();
+        String typedText = scanner.nextLine();
+
+        if (originalPassage.length() == typedText.length() &&
+                originalPassage.length() > 0) {
+            checkTypingAccuracy(originalPassage, typedText);
+        } else {
+            System.out.println("Invalid input. Strings must have equal non-zero length.");
+        }
+
+        scanner.close();
     }
 }
