@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
-public class FirstNonRepeatingCharacter {
+public class FirstNonRepeatingCharacterQ4 {
 
     static char findFirstNonRepeatingChar(String text) {
         int[] frequency = new int[256];
 
-        for (int i = 0; i < text.length(); i++) {
-            frequency[text.charAt(i)]++;
+        for (int index = 0; index < text.length(); index++) {
+            frequency[text.charAt(index)]++;
         }
 
-        for (int i = 0; i < text.length(); i++) {
-            if (frequency[text.charAt(i)] == 1) {
-                return text.charAt(i);
+        for (int index = 0; index < text.length(); index++) {
+            if (frequency[text.charAt(index)] == 1) {
+                return text.charAt(index);
             }
         }
 
@@ -19,10 +19,10 @@ public class FirstNonRepeatingCharacter {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter a word or sentence: ");
-        String text = sc.nextLine();
+        System.out.print("Enter text: ");
+        String text = scanner.nextLine();
 
         char result = findFirstNonRepeatingChar(text);
 
@@ -32,6 +32,6 @@ public class FirstNonRepeatingCharacter {
             System.out.println("First Non-Repeating Character: '" + result + "'");
         }
 
-        sc.close();
+        scanner.close();
     }
 }
